@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   CCTV-X Cyberpunk Surveillance Design System
+   Matches Futuristic Command Center Interface
+   ────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Brand palette */
+  --color-primary-50: #eef9ff;
+  --color-primary-100: #d8f0ff;
+  --color-primary-200: #b9e5ff;
+  --color-primary-300: #89d5ff;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0d7ef5;
+  --color-primary-700: #0c66e1;
+  --color-primary-800: #1153b6;
+  --color-primary-900: #0f3a7d;
+
+  --color-cyan-neon: #00f0ff;
+  --color-cyan-glow: rgba(0, 240, 255, 0.4);
+  --color-blue-glow: rgba(13, 126, 245, 0.45);
+
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-accent-600: #0891b2;
+
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
+
+  /* Surface colours */
+  --color-surface-950: #040814;
+  --color-surface-900: #070d1e;
+  --color-surface-850: #0a1329;
+  --color-surface-800: #0e1a38;
+  --color-surface-700: #14244a;
+  --color-surface-600: #1e3363;
+  --color-surface-500: #28427e;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Base Reset ──────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  scroll-behavior: smooth;
+  background-color: #040814;
+  color: #e2e8f0;
+}
+
+body {
+  background-color: #040814;
+  color: #e2e8f0;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbars ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #060b18;
+}
+::-webkit-scrollbar-thumb {
+  background: #14244a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0d7ef5;
+}
+
+/* ── Cyber Panels & Glassmorphism ────────────────────────────────────────── */
+.cyber-panel {
+  background: linear-gradient(180deg, rgba(12, 22, 48, 0.75) 0%, rgba(6, 12, 28, 0.88) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 180, 255, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cyber-panel:hover {
+  border-color: rgba(0, 200, 255, 0.32);
+}
+
+.cyber-panel-glow {
+  background: linear-gradient(180deg, rgba(14, 25, 54, 0.85) 0%, rgba(7, 14, 32, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(13, 126, 245, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(13, 126, 245, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.hud-panel {
+  background: rgba(8, 15, 33, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 12px;
+}
+
+/* ── High-Tech Accents & Animations ──────────────────────────────────────── */
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.7), inset 0 0 15px rgba(0, 240, 255, 0.35);
+  }
+}
+
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ping-dot {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  50% { transform: scale(1.4); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.9; }
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes scan-horizontal {
+  0% { top: 0%; opacity: 0.8; }
+  50% { opacity: 0.4; }
+  100% { top: 100%; opacity: 0.8; }
+}
+
+.animate-pulse-neon {
+  animation: neon-pulse 3s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.live-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-indicator::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  animation: ping-dot 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ── Subtle Background Grid ──────────────────────────────────────────────── */
+.cyber-grid-bg {
+  background-color: #040814;
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(13, 126, 245, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.06) 0%, transparent 50%),
+    linear-gradient(rgba(14, 26, 56, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 26, 56, 0.22) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* ── Glow Borders ────────────────────────────────────────────────────────── */
+.glow-border-cyan {
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.12);
+}
+
+.glow-border-blue {
+  border: 1px solid rgba(13, 126, 245, 0.4);
+  box-shadow: 0 0 18px rgba(13, 126, 245, 0.18);
+}
+
+.glow-border-danger {
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.2);
+}
+
+/* ── Cyber Toggle Switch ─────────────────────────────────────────────────── */
+.cyber-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: rgba(15, 26, 54, 0.9);
+  border: 1px solid rgba(0, 180, 255, 0.25);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cyber-switch.active {
+  background: #0d7ef5;
+  border-color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+}
+
+.cyber-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.cyber-switch.active .cyber-switch-thumb {
+  transform: translateX(20px);
+  background: #ffffff;
+}
+
+/* ── Futuristic Buttons ──────────────────────────────────────────────────── */
+.btn-cyber-primary {
+  background: linear-gradient(135deg, #0d7ef5 0%, #06b6d4 100%);
+  color: #ffffff;
+  border: 1px solid rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 16px rgba(13, 126, 245, 0.4);
+  transition: all 0.2s ease;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-cyber-primary:hover {
+  background: linear-gradient(135deg, #1b8eff 0%, #22d3ee 100%);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.65);
+  transform: translateY(-1px);
+}
+
+.btn-cyber-secondary {
+  background: rgba(14, 25, 54, 0.8);
+  color: #38bdf8;
+  border: 1px solid rgba(0, 180, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 140, 255, 0.1);
+  transition: all 0.2s ease;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-cyber-secondary:hover {
+  background: rgba(20, 38, 78, 0.9);
+  border-color: rgba(0, 240, 255, 0.6);
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.25);
+}
+
+/* ── Typography & Monospace Numbers ──────────────────────────────────────── */
+.font-mono-numbers {
+  font-family: 'JetBrains Mono', monospace;
+  font-feature-settings: 'tnum' on, 'zero' on;
+}
